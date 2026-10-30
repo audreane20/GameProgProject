@@ -563,18 +563,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlickeringLight
       objectReference: {fileID: 0}
-    - target: {fileID: 6007787778049410347, guid: 546fbfbd28c14af438cc140140c303d7, type: 3}
-      propertyPath: Loop
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6007787778049410347, guid: 546fbfbd28c14af438cc140140c303d7, type: 3}
-      propertyPath: m_Volume
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6007787778049410347, guid: 546fbfbd28c14af438cc140140c303d7, type: 3}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7541052510307204555, guid: 546fbfbd28c14af438cc140140c303d7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

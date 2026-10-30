@@ -7,6 +7,7 @@ public class MainMenuController : MonoBehaviour
     public GameObject playButton;
     public GameObject instructionsButton;
     public GameObject quitButton;
+    public GameObject TitleText;
 
     public void PlayGame()
     {
@@ -24,6 +25,7 @@ public class MainMenuController : MonoBehaviour
         playButton.SetActive(false);
         instructionsButton.SetActive(false);
         quitButton.SetActive(false);
+        TitleText.SetActive(false);
 
         instructionsPanel.SetActive(true);
     }
@@ -35,6 +37,7 @@ public class MainMenuController : MonoBehaviour
         playButton.SetActive(true);
         instructionsButton.SetActive(true);
         quitButton.SetActive(true);
+        TitleText.SetActive(true);
     }
 
 }
