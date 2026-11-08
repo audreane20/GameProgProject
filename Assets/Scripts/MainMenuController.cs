@@ -11,7 +11,9 @@ public class MainMenuController : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("SampleScene");
+        // SceneManager.LoadScene("SampleScene");
+        // Use the LoadingScreenManager to switch to the game scene with a loading screen
+        LoadingScreenManager.Instance.SwitchToScene(1);
     }
 
     public void QuitGame()
