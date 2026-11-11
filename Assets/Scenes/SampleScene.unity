@@ -738,12 +738,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27fe9bb61eabb424cb79c48d815683da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StaminaHUD
-  playerStamina: {fileID: 1994436665}
-  staminaBar: {fileID: 711393467}
-  staminaFill: {fileID: 112348204}
-  normalColor: {r: 0, g: 1, b: 0, a: 1}
-  lowColor: {r: 1, g: 0, b: 0, a: 1}
-  exhaustedText: {fileID: 1001751908}
 --- !u!114 &435729834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1010,7 +1004,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -200}
   m_SizeDelta: {x: 300, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &543607331
@@ -3326,6 +3320,13 @@ MonoBehaviour:
   drainRate: 25
   recoveryRate: 15
   restartStamina: 25
+  movementSpeed: 3
+  sprintMultiplier: 2
+  staminaBar: {fileID: 711393467}
+  staminaFill: {fileID: 112348204}
+  normalColor: {r: 0, g: 1, b: 0, a: 1}
+  lowColor: {r: 1, g: 0, b: 0, a: 1}
+  exhaustedText: {fileID: 1001751908}
 --- !u!4 &1994436666
 Transform:
   m_ObjectHideFlags: 0
