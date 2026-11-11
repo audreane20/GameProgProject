@@ -14,7 +14,7 @@ public class StaminaTestInput : MonoBehaviour
 
     private void Update()
     {
-        // Only request sprinting while game time is running.
+        // Only request sprinting while game time is running(left shift is pressed and game is not paused)
         bool sprintRequested = Input.GetKey(KeyCode.LeftShift) && Time.timeScale > 0f;
         stamina.SetSprinting(sprintRequested);
     }

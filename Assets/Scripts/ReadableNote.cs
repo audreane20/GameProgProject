@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// Shows a prompt near the table and opens the note with E
+// Shows a prompt near the table and opens the note with E button. Closes the note with E or the Close button.
 public class ReadableNote : MonoBehaviour
 {
     [Header("Note Interface")]

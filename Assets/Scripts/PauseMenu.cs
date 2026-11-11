@@ -93,15 +93,15 @@ public class PauseMenu : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-    // Restore normal game speed before leaving the paused scene
-    Time.timeScale = 1f;
+        // Restore normal game speed before leaving the paused scene
+        Time.timeScale = 1f;
 
-    // Release the mouse so the player can click the menu buttons
-    Cursor.lockState = CursorLockMode.None;
-    Cursor.visible = true;
+        // Release the mouse so the player can click the menu buttons
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
-    // Load our existing menu scene.
-    SceneManager.LoadScene("Main menu");
+        // Load our existing menu scene.
+        SceneManager.LoadScene("Main menu");
     }   
 
     // Show only the controls instructions and Back button
