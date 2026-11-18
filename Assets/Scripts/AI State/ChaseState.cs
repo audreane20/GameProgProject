@@ -16,6 +16,12 @@ public class ChaseState : IState
  
     public void Execute() 
     { 
+        //Checks if no player exists. if none found, ai will just patrol around
+        if(aiController.Player == null){
+            aiController.StateMachine.TransitionToState(StateType.Patrol);
+            return;
+        }
+
         if (!aiController.CanSeePlayer()) 
         { 
             aiController.StateMachine.TransitionToState(StateType.Patrol); 

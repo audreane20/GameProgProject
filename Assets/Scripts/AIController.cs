@@ -17,6 +17,7 @@ public class AIController : MonoBehaviour
     [Header("Attack Settings")]
     public Transform leftHandTransform;
     public Transform rightHandTransform;
+
     [Header("Vision Settings")]
     public float viewDistance = 10f;
     public float viewAngle = 90f;
@@ -28,10 +29,29 @@ public class AIController : MonoBehaviour
     public float visionPersistence = 0.5f; // seconds to keep seeing after losing sight
     private float lastSeenTime = -999f;
 
+    [Header("Patrol Settings")]
+    public float patrolWaitTime = 1.5f;
+
 
     // Add State Machine code Here
     void Start() 
     { 
+        //todo
+        if (leftHandTransform == null || rightHandTransform == null)// checks if hands are implemented
+        {
+            Debug.LogWarning($"{name}: One or both hand transforms are not assigned.", this);
+        }
+        //If player does not exist. look for an object with the player tag. if that object exists, then assign that as the player
+        if (Player == null){
+            GameObject playerObj = GameObject.FindWithTag("Player");
+            if(playerObj != null){
+            Player = playerObj.transform;
+            }
+            else{
+                Debug.LogWarning($"{name}: No Player assigned and no object tagged 'Player' found.", this);
+            }
+        }
+        
         Agent = GetComponent<NavMeshAgent>(); 
         aiAnimationController = GetComponent<AIAnimationController>(); 
         // Animator = GetComponent<Animator>(); // Commented out since we're not using animations 
@@ -59,6 +79,8 @@ public class AIController : MonoBehaviour
         {
             return false;
         }
+        // If recently seen, still count as visible
+        bool recentlySeen = Time.time - lastSeenTime < visionPersistence;
 
         Vector3 eyePosition = transform.position + Vector3.up * eyeHeight;
         Vector3 targetPosition = Player.position + Vector3.up * 0.5f;
@@ -69,31 +91,31 @@ public class AIController : MonoBehaviour
         // Check field of view
         if (angleToPlayer > viewAngle / 2f)
         {
-            return Time.time - lastSeenTime < visionPersistence;
+            return recentlySeen;
         }
 
         // Check distance
         if (distanceToPlayer > viewDistance)
         {
-            return Time.time - lastSeenTime < visionPersistence;
+            return recentlySeen;
         }
 
         // Perform raycast
-        if (Physics.Raycast(eyePosition, directionToPlayer, out RaycastHit hit, viewDistance))
+        // visionmask: defines what blocks los. in this instance its obstacleMake and Playermask
+        int visionMask = obstacleMask | playerMask;
+        if (Physics.Raycast(eyePosition, directionToPlayer, out RaycastHit hit, distanceToPlayer, visionMask, QueryTriggerInteraction.Ignore))
         {
+            //checks if what the raycast hit is the player
+            bool hitIsPlayer = ((1 << hit.collider.gameObject.layer) & playerMask) != 0 || hit.transform.IsChildOf(Player);
             // If hit the player
-            if (hit.transform == Player)
+            if (!hitIsPlayer)
             {
-                lastSeenTime = Time.time;
-                return true;
+                return recentlySeen; // something is in the way
             }
         }
-    
 
-        // If recently seen, still count as visible
-        bool recentlySeen = Time.time - lastSeenTime < visionPersistence;
-
-        return recentlySeen;
+        lastSeenTime = Time.time;
+        return true;
     }
 
     public bool CheckHandsCollision(out GameObject collidedObject, string Tag)
@@ -103,6 +125,12 @@ public class AIController : MonoBehaviour
 
         foreach (Transform hand in handTransforms)
         {
+            //TODO
+            //skips hand logic if we didn't do it
+            if(hand == null)
+            {
+                continue;
+            }
             // Overlap check — sphere or capsule works well for melee hitboxes
             Collider[] hits = Physics.OverlapSphere(hand.position, 0.5f, PlayerLayer);
 
@@ -124,6 +152,10 @@ public class AIController : MonoBehaviour
     // New method to check if the AI is within attack range
     public bool IsPlayerInAttackRange()
     {
+        //Checks if player exists
+        if(Player == null)
+            return false;
+
         float distanceToPlayer = Vector3.Distance(transform.position, Player.position);
         return distanceToPlayer <= AttackRange;
     }

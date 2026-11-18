@@ -6,6 +6,7 @@ public class PatrolState : IState
     private AIController aiController; 
     private int currentWaypointIndex = 0; 
     private bool isWaiting = false; 
+    private Coroutine waitRoutine;
  
     public StateType Type => StateType.Patrol; 
  
@@ -16,10 +17,10 @@ public class PatrolState : IState
  
     public void Enter() 
     { 
- 
         aiController.Agent.isStopped = false; 
         MoveToNextWaypoint(); 
     } 
+
      public void Execute() 
     { 
         if (aiController.CanSeePlayer()) 
@@ -30,13 +31,25 @@ public class PatrolState : IState
  
         if (!isWaiting && !aiController.Agent.pathPending && aiController.Agent.remainingDistance <= aiController.Agent.stoppingDistance) 
         { 
-            aiController.StartCoroutine(WaitAndAnimate()); 
+            waitRoutine = aiController.StartCoroutine(WaitAndAnimate()); 
         } 
  
     } 
  
     public void Exit() 
     { 
+        if(waitRoutine != null){
+            aiController.StopCoroutine(waitRoutine);
+            waitRoutine = null;
+        }
+
+        isWaiting = false;
+
+        //rawr
+        if(aiController.aiAnimationController != null){
+            aiController.aiAnimationController.animator.ResetTrigger("doScream");
+        }
+
         aiController.Agent.isStopped = false; 
     } 
  
@@ -46,14 +59,16 @@ public class PatrolState : IState
         aiController.Agent.isStopped = true; 
  
         // Play patrol point animation 
-        aiController.aiAnimationController.animator.SetTrigger("doScream"); 
- 
-        // Wait for animation duration (1.5 sec here, adjust to your animation length) 
-        yield return new WaitForSeconds(5); 
+        if(aiController.aiAnimationController != null){
+            aiController.aiAnimationController.animator.SetTrigger("doScream"); 
+        }
+        // Wait for animation duration
+        yield return new WaitForSeconds(aiController.patrolWaitTime); 
  
         aiController.Agent.isStopped = false; 
         MoveToNextWaypoint(); 
         isWaiting = false; 
+        waitRoutine = null;
     } 
  
     private void MoveToNextWaypoint() 
