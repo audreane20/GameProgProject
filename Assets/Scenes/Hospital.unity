@@ -580,6 +580,7 @@ GameObject:
   - component: {fileID: 23489231}
   - component: {fileID: 23489233}
   - component: {fileID: 23489232}
+  - component: {fileID: 23489234}
   m_Layer: 0
   m_Name: Door-material (5)
   m_TagString: Untagged
@@ -679,6 +680,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 23489230}
   m_Mesh: {fileID: 3331799470787400984, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
+--- !u!114 &23489234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23489230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &37654857
 GameObject:
   m_ObjectHideFlags: 0
@@ -1207,6 +1228,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 79440544}
   m_Mesh: {fileID: 3331799470787400984, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
+--- !u!1 &92142499
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 92142500}
+  m_Layer: 0
+  m_Name: WP_ (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &92142500
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92142499}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -16.09, y: 2.763, z: -0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1927896757}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &144431508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1218,7 +1270,7 @@ GameObject:
   - component: {fileID: 144431509}
   - component: {fileID: 144431511}
   - component: {fileID: 144431510}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall5-material (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2944,13 +2996,53 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2331144524304843131, guid: 8be415093d9566c4eb9cea838ecb72a5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 702895724}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -6341700014945128964, guid: 8be415093d9566c4eb9cea838ecb72a5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 282311709}
   m_SourcePrefab: {fileID: -5645937942226959685, guid: 8be415093d9566c4eb9cea838ecb72a5, type: 3}
 --- !u!4 &282311707 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -2331144524304843131, guid: 8be415093d9566c4eb9cea838ecb72a5, type: 3}
   m_PrefabInstance: {fileID: 282311706}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &282311708 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6341700014945128964, guid: 8be415093d9566c4eb9cea838ecb72a5, type: 3}
+  m_PrefabInstance: {fileID: 282311706}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &282311709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282311708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
+  m_SerializedVersion: 0
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: aa1ab0701010fba45b5f9525d71cd079, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &287393481
 GameObject:
   m_ObjectHideFlags: 0
@@ -3221,6 +3313,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 301445491}
   m_Mesh: {fileID: -6343011366621366604, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
+--- !u!1 &309350155
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 309350156}
+  m_Layer: 0
+  m_Name: WP_ (0)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &309350156
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309350155}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.81, y: 0, z: -0.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1927896757}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &313582763
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3486,6 +3609,7 @@ GameObject:
   - component: {fileID: 347004012}
   - component: {fileID: 347004014}
   - component: {fileID: 347004013}
+  - component: {fileID: 347004015}
   m_Layer: 0
   m_Name: Door-material (6)
   m_TagString: Untagged
@@ -3565,6 +3689,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 347004011}
   m_Mesh: {fileID: 3331799470787400984, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
+--- !u!114 &347004015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347004011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &352379162
 GameObject:
   m_ObjectHideFlags: 0
@@ -3792,6 +3936,7 @@ GameObject:
   - component: {fileID: 404447617}
   - component: {fileID: 404447619}
   - component: {fileID: 404447618}
+  - component: {fileID: 404447620}
   m_Layer: 0
   m_Name: Door-material (7)
   m_TagString: Untagged
@@ -3871,6 +4016,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 404447616}
   m_Mesh: {fileID: 3331799470787400984, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
+--- !u!114 &404447620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404447616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &405358659
 GameObject:
   m_ObjectHideFlags: 0
@@ -4590,7 +4755,7 @@ GameObject:
   - component: {fileID: 499653623}
   - component: {fileID: 499653625}
   - component: {fileID: 499653624}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall5-material (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4680,7 +4845,7 @@ GameObject:
   - component: {fileID: 501934319}
   - component: {fileID: 501934321}
   - component: {fileID: 501934320}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall5-material (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4822,7 +4987,7 @@ GameObject:
   - component: {fileID: 508121037}
   - component: {fileID: 508121039}
   - component: {fileID: 508121038}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door-material (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6762,7 +6927,7 @@ GameObject:
   - component: {fileID: 669759100}
   - component: {fileID: 669759102}
   - component: {fileID: 669759101}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall5-material (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7249,6 +7414,7 @@ GameObject:
   - component: {fileID: 696416621}
   - component: {fileID: 696416623}
   - component: {fileID: 696416622}
+  - component: {fileID: 696416624}
   m_Layer: 0
   m_Name: Door-material (4)
   m_TagString: Untagged
@@ -7328,6 +7494,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 696416620}
   m_Mesh: {fileID: 3331799470787400984, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
+--- !u!114 &696416624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696416620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &699200853
 GameObject:
   m_ObjectHideFlags: 0
@@ -7598,6 +7784,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 707325307}
   m_Mesh: {fileID: -2177010369484897491, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
+--- !u!1 &710191115
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710191116}
+  m_Layer: 0
+  m_Name: WP_ (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710191116
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710191115}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -16.09, y: 0, z: -0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1927896757}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &735307070
 GameObject:
   m_ObjectHideFlags: 0
@@ -7879,7 +8096,7 @@ GameObject:
   - component: {fileID: 771462316}
   - component: {fileID: 771462318}
   - component: {fileID: 771462317}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door-material (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8354,7 +8571,7 @@ GameObject:
   - component: {fileID: 822082216}
   - component: {fileID: 822082218}
   - component: {fileID: 822082217}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall5-material (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9328,7 +9545,7 @@ GameObject:
   - component: {fileID: 909088655}
   - component: {fileID: 909088657}
   - component: {fileID: 909088656}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall5-material (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9418,7 +9635,7 @@ GameObject:
   - component: {fileID: 909341988}
   - component: {fileID: 909341990}
   - component: {fileID: 909341989}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall5-material (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10384,7 +10601,7 @@ GameObject:
   - component: {fileID: 960073820}
   - component: {fileID: 960073822}
   - component: {fileID: 960073821}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall5-material (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10474,6 +10691,7 @@ GameObject:
   - component: {fileID: 960320683}
   - component: {fileID: 960320685}
   - component: {fileID: 960320684}
+  - component: {fileID: 960320686}
   m_Layer: 0
   m_Name: Door-material (6)
   m_TagString: Untagged
@@ -10553,6 +10771,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 960320682}
   m_Mesh: {fileID: 3331799470787400984, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
+--- !u!114 &960320686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960320682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &964178412
 GameObject:
   m_ObjectHideFlags: 0
@@ -11044,7 +11282,7 @@ GameObject:
   - component: {fileID: 1071772979}
   - component: {fileID: 1071772981}
   - component: {fileID: 1071772980}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall5-material (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11134,6 +11372,7 @@ GameObject:
   - component: {fileID: 1073164580}
   - component: {fileID: 1073164582}
   - component: {fileID: 1073164581}
+  - component: {fileID: 1073164583}
   m_Layer: 0
   m_Name: Door-material (6)
   m_TagString: Untagged
@@ -11213,6 +11452,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1073164579}
   m_Mesh: {fileID: 3331799470787400984, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
+--- !u!114 &1073164583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073164579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &1075327441
 GameObject:
   m_ObjectHideFlags: 0
@@ -11224,7 +11483,7 @@ GameObject:
   - component: {fileID: 1075327442}
   - component: {fileID: 1075327444}
   - component: {fileID: 1075327443}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall5-material (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13012,7 +13271,7 @@ GameObject:
   - component: {fileID: 1323450639}
   - component: {fileID: 1323450641}
   - component: {fileID: 1323450640}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall5-material (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13102,6 +13361,7 @@ GameObject:
   - component: {fileID: 1326298270}
   - component: {fileID: 1326298272}
   - component: {fileID: 1326298271}
+  - component: {fileID: 1326298273}
   m_Layer: 0
   m_Name: Door-material (7)
   m_TagString: Untagged
@@ -13181,6 +13441,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1326298269}
   m_Mesh: {fileID: 3331799470787400984, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
+--- !u!114 &1326298273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326298269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1001 &1329702150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13192,6 +13472,10 @@ PrefabInstance:
     - target: {fileID: -6689036041284674117, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
       propertyPath: m_Name
       value: hospital_room
+      objectReference: {fileID: 0}
+    - target: {fileID: -5320707355648216503, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -4468204552500398906, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13260,6 +13544,10 @@ PrefabInstance:
     - target: {fileID: 8277177193029750185, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8329953531662100618, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13798,6 +14086,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1344561444}
   m_Mesh: {fileID: -6343011366621366604, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
+--- !u!1 &1347053676
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1347053677}
+  m_Layer: 0
+  m_Name: WP_ (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1347053677
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347053676}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.8, y: 2.763, z: -0.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1927896757}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1361324941
 GameObject:
   m_ObjectHideFlags: 0
@@ -14349,6 +14668,7 @@ GameObject:
   - component: {fileID: 1411761751}
   - component: {fileID: 1411761753}
   - component: {fileID: 1411761752}
+  - component: {fileID: 1411761754}
   m_Layer: 0
   m_Name: Door-material (6)
   m_TagString: Untagged
@@ -14428,6 +14748,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1411761750}
   m_Mesh: {fileID: 3331799470787400984, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
+--- !u!114 &1411761754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411761750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &1414056163
 GameObject:
   m_ObjectHideFlags: 0
@@ -14788,6 +15128,7 @@ GameObject:
   - component: {fileID: 1468556810}
   - component: {fileID: 1468556812}
   - component: {fileID: 1468556811}
+  - component: {fileID: 1468556813}
   m_Layer: 0
   m_Name: Door-material (4)
   m_TagString: Untagged
@@ -14867,6 +15208,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1468556809}
   m_Mesh: {fileID: 3331799470787400984, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
+--- !u!114 &1468556813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468556809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1001 &1495983381
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15394,6 +15755,7 @@ GameObject:
   - component: {fileID: 1569026420}
   - component: {fileID: 1569026422}
   - component: {fileID: 1569026421}
+  - component: {fileID: 1569026423}
   m_Layer: 0
   m_Name: Door-material (4)
   m_TagString: Untagged
@@ -15473,6 +15835,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1569026419}
   m_Mesh: {fileID: 3331799470787400984, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
+--- !u!114 &1569026423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569026419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &1575833154
 GameObject:
   m_ObjectHideFlags: 0
@@ -16834,7 +17216,7 @@ GameObject:
   - component: {fileID: 1663120992}
   - component: {fileID: 1663120994}
   - component: {fileID: 1663120993}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall5-material (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17268,6 +17650,7 @@ GameObject:
   - component: {fileID: 1700759140}
   - component: {fileID: 1700759142}
   - component: {fileID: 1700759141}
+  - component: {fileID: 1700759143}
   m_Layer: 0
   m_Name: Door-material (7)
   m_TagString: Untagged
@@ -17347,6 +17730,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1700759139}
   m_Mesh: {fileID: 3331799470787400984, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
+--- !u!114 &1700759143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700759139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &1705056649
 GameObject:
   m_ObjectHideFlags: 0
@@ -17707,6 +18110,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1760529538}
   m_Mesh: {fileID: -2177010369484897491, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
+--- !u!1001 &1761124302
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1976021194373145427, guid: 1416b8f2b3931544caa5a3ed6e35bb92, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1976021194373145427, guid: 1416b8f2b3931544caa5a3ed6e35bb92, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.208
+      objectReference: {fileID: 0}
+    - target: {fileID: 1976021194373145427, guid: 1416b8f2b3931544caa5a3ed6e35bb92, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 1976021194373145427, guid: 1416b8f2b3931544caa5a3ed6e35bb92, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1976021194373145427, guid: 1416b8f2b3931544caa5a3ed6e35bb92, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1976021194373145427, guid: 1416b8f2b3931544caa5a3ed6e35bb92, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1976021194373145427, guid: 1416b8f2b3931544caa5a3ed6e35bb92, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1976021194373145427, guid: 1416b8f2b3931544caa5a3ed6e35bb92, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1976021194373145427, guid: 1416b8f2b3931544caa5a3ed6e35bb92, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1976021194373145427, guid: 1416b8f2b3931544caa5a3ed6e35bb92, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4590083134138372382, guid: 1416b8f2b3931544caa5a3ed6e35bb92, type: 3}
+      propertyPath: m_Name
+      value: TestDummy
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1416b8f2b3931544caa5a3ed6e35bb92, type: 3}
 --- !u!1 &1761332398
 GameObject:
   m_ObjectHideFlags: 0
@@ -18152,7 +18612,7 @@ GameObject:
   - component: {fileID: 1773497232}
   - component: {fileID: 1773497234}
   - component: {fileID: 1773497233}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall5-material (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18602,7 +19062,7 @@ GameObject:
   - component: {fileID: 1854661384}
   - component: {fileID: 1854661386}
   - component: {fileID: 1854661385}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall5-material (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18935,6 +19395,91 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1882753735}
   m_Mesh: {fileID: -6343011366621366604, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
+--- !u!1001 &1889493442
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4619718603832573898, guid: 29fad1cbd3b8ce44c96a5045a858cfb9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619718603832573898, guid: 29fad1cbd3b8ce44c96a5045a858cfb9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619718603832573898, guid: 29fad1cbd3b8ce44c96a5045a858cfb9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619718603832573898, guid: 29fad1cbd3b8ce44c96a5045a858cfb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -24.285585
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619718603832573898, guid: 29fad1cbd3b8ce44c96a5045a858cfb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.074
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619718603832573898, guid: 29fad1cbd3b8ce44c96a5045a858cfb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.17723288
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619718603832573898, guid: 29fad1cbd3b8ce44c96a5045a858cfb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619718603832573898, guid: 29fad1cbd3b8ce44c96a5045a858cfb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619718603832573898, guid: 29fad1cbd3b8ce44c96a5045a858cfb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619718603832573898, guid: 29fad1cbd3b8ce44c96a5045a858cfb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619718603832573898, guid: 29fad1cbd3b8ce44c96a5045a858cfb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619718603832573898, guid: 29fad1cbd3b8ce44c96a5045a858cfb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619718603832573898, guid: 29fad1cbd3b8ce44c96a5045a858cfb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5250294354319530166, guid: 29fad1cbd3b8ce44c96a5045a858cfb9, type: 3}
+      propertyPath: m_Name
+      value: NPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 8577765320013268481, guid: 29fad1cbd3b8ce44c96a5045a858cfb9, type: 3}
+      propertyPath: 'Waypoints.Array.data[0]'
+      value: 
+      objectReference: {fileID: 309350156}
+    - target: {fileID: 8577765320013268481, guid: 29fad1cbd3b8ce44c96a5045a858cfb9, type: 3}
+      propertyPath: 'Waypoints.Array.data[1]'
+      value: 
+      objectReference: {fileID: 710191116}
+    - target: {fileID: 8577765320013268481, guid: 29fad1cbd3b8ce44c96a5045a858cfb9, type: 3}
+      propertyPath: 'Waypoints.Array.data[2]'
+      value: 
+      objectReference: {fileID: 92142500}
+    - target: {fileID: 8577765320013268481, guid: 29fad1cbd3b8ce44c96a5045a858cfb9, type: 3}
+      propertyPath: 'Waypoints.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1347053677}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 29fad1cbd3b8ce44c96a5045a858cfb9, type: 3}
 --- !u!1 &1896696591
 GameObject:
   m_ObjectHideFlags: 0
@@ -19036,7 +19581,7 @@ GameObject:
   - component: {fileID: 1902780200}
   - component: {fileID: 1902780202}
   - component: {fileID: 1902780201}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall5-material (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19126,6 +19671,7 @@ GameObject:
   - component: {fileID: 1903964594}
   - component: {fileID: 1903964596}
   - component: {fileID: 1903964595}
+  - component: {fileID: 1903964597}
   m_Layer: 0
   m_Name: Door-material (5)
   m_TagString: Untagged
@@ -19205,6 +19751,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1903964593}
   m_Mesh: {fileID: 3331799470787400984, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
+--- !u!114 &1903964597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903964593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &1908295256
 GameObject:
   m_ObjectHideFlags: 0
@@ -19306,6 +19872,7 @@ GameObject:
   - component: {fileID: 1908370902}
   - component: {fileID: 1908370904}
   - component: {fileID: 1908370903}
+  - component: {fileID: 1908370905}
   m_Layer: 0
   m_Name: Door-material (5)
   m_TagString: Untagged
@@ -19385,6 +19952,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1908370901}
   m_Mesh: {fileID: 3331799470787400984, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
+--- !u!114 &1908370905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908370901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &1911733410
 GameObject:
   m_ObjectHideFlags: 0
@@ -19655,6 +20242,41 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1918813951}
   m_Mesh: {fileID: -6343011366621366604, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
+--- !u!1 &1927896756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1927896757}
+  m_Layer: 0
+  m_Name: Enemy Wapoints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1927896757
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927896756}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.66542, y: 0, z: 0.05653}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 309350156}
+  - {fileID: 710191116}
+  - {fileID: 92142500}
+  - {fileID: 1347053677}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1942042454
 GameObject:
   m_ObjectHideFlags: 0
@@ -20116,7 +20738,7 @@ GameObject:
   - component: {fileID: 1987864413}
   - component: {fileID: 1987864415}
   - component: {fileID: 1987864414}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall5-material (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20644,6 +21266,7 @@ GameObject:
   - component: {fileID: 2045365344}
   - component: {fileID: 2045365346}
   - component: {fileID: 2045365345}
+  - component: {fileID: 2045365347}
   m_Layer: 0
   m_Name: Door-material (4)
   m_TagString: Untagged
@@ -20723,6 +21346,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2045365343}
   m_Mesh: {fileID: 3331799470787400984, guid: ff566d8cedde3a84697495d1ff262913, type: 3}
+--- !u!114 &2045365347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045365343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &2048001045
 GameObject:
   m_ObjectHideFlags: 0
@@ -22080,3 +22723,6 @@ SceneRoots:
   - {fileID: 502672406}
   - {fileID: 2119088600}
   - {fileID: 1336078483}
+  - {fileID: 1927896757}
+  - {fileID: 1889493442}
+  - {fileID: 1761124302}
