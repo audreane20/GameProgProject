@@ -80,13 +80,11 @@ public class EscapeGameManager : MonoBehaviour
 
     private void LateUpdate()
     {
-<<<<<<< Updated upstream
-=======
         if (messageText != null)
             messageText.enabled = Time.timeScale > 0f;
 
         // Prompts only stay up while something keeps asking for them.
->>>>>>> Stashed changes
+
         if (promptText != null && promptFrame < Time.frameCount)
             promptText.text = "";
     }

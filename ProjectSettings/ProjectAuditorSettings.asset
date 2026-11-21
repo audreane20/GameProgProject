@@ -27,18 +27,10 @@ MonoBehaviour:
         Value: 204800
       - Key: LoadInBackGroundClipSizeThresholdBytes
         Value: 204800
-<<<<<<< Updated upstream
-=======
       - Key: StreamingAssetsFolderSizeLimit
         Value: 50
->>>>>>> Stashed changes
       - Key: TextureStreamingMipmapsSizeLimit
         Value: 4000
       - Key: SpriteAtlasEmptySpaceLimit
         Value: 50
-<<<<<<< Updated upstream
-      - Key: StreamingAssetsFolderSizeLimit
-        Value: 50
-=======
->>>>>>> Stashed changes
     CurrentParamsIndex: 0
