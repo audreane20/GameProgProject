@@ -33776,7 +33776,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+<<<<<<< Updated upstream
   m_text: "<b>CONTROLS</b>\r\n\r\nW, A, S, D \u2014 Move\r\nMouse \u2014 Look around\r\nE \u2014 Interact / collect / open doors / hide\r\nCtrl / C \u2014 Crouch\r\nShift \u2014 Sprint\r\nLeft Mouse Button \u2014 Use / throw item\r\nEsc \u2014 Pause\r\nTab \u2014 Open / close inventory\r\n\r\n<b>STAY ALERT</b>\r\nRunning and throwing objects make noise\r\nthat can attract the monster.\r\nUse distractions carefully."
+=======
+  m_text: "<b>CONTROLS</b>\r\n\r\nW, A, S, D \u2014 Move\r\nMouse \u2014 Look around\r\nE
+    \u2014 Interact / collect / open doors / hide\r\nCtrl / C \u2014 Crouch\r\nShift
+    \u2014 Sprint\r\nLeft Mouse Button \u2014 Use / throw item\nV \u2014 Change View\r\nEsc
+    \u2014 Pause\r\nTab \u2014 Open / close inventory\r\n\r\n<b>STAY ALERT</b>\r\nRunning
+    and throwing objects make noise\r\nthat can attract the monster.\r\nUse distractions
+    carefully."
+>>>>>>> Stashed changes
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

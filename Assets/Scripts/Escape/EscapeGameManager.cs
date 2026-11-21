@@ -80,6 +80,13 @@ public class EscapeGameManager : MonoBehaviour
 
     private void LateUpdate()
     {
+<<<<<<< Updated upstream
+=======
+        if (messageText != null)
+            messageText.enabled = Time.timeScale > 0f;
+
+        // Prompts only stay up while something keeps asking for them.
+>>>>>>> Stashed changes
         if (promptText != null && promptFrame < Time.frameCount)
             promptText.text = "";
     }
@@ -284,7 +291,7 @@ public class EscapeGameManager : MonoBehaviour
         scaler.referenceResolution = new Vector2(1920, 1080);
         scaler.matchWidthOrHeight = 0.5f;
 
-        objectiveText = MakeText(canvas.transform, "Objective", new Vector2(0, 1), new Vector2(40, -40), 34, TextAlignmentOptions.TopLeft, new Vector2(900, 80));
+        objectiveText = MakeText(canvas.transform, "Objective", new Vector2(0, 1), new Vector2(40, -100), 34, TextAlignmentOptions.TopLeft, new Vector2(900, 80));
         objectiveText.color = new Color(0.85f, 0.85f, 0.8f, 0.9f);
         promptText = MakeText(canvas.transform, "Prompt", new Vector2(0.5f, 0), new Vector2(0, 160), 36, TextAlignmentOptions.Center, new Vector2(1400, 80));
         messageText = MakeText(canvas.transform, "Message", new Vector2(0.5f, 0.5f), new Vector2(0, -180), 40, TextAlignmentOptions.Center, new Vector2(1600, 140));
