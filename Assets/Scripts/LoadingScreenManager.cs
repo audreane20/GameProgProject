@@ -26,7 +26,6 @@ public class LoadingScreenManager : MonoBehaviour
 
     IEnumerator SwitchToSceneAsync(int id)
     {
-        // Start loading the scene asynchronously
         AsyncOperation operation = SceneManager.LoadSceneAsync(id);
         while (!operation.isDone) // While the scene is still loading
         {

@@ -1,6 +1,5 @@
 using UnityEngine;
 
-// Plays footstep sounds while the kid walks. Quieter when crouching, faster when running.
 [RequireComponent(typeof(ChildPlayerController))]
 public class ChildFootsteps : MonoBehaviour
 {

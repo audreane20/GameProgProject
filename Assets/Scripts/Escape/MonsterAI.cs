@@ -2,13 +2,7 @@ using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 
-// The hospital monster. "Red light, green light":
-//  - It roams the halls on the NavMesh (so it walks around walls and furniture).
-//  - When it spots the kid it stops and stares: eyes blaze red and the chase music starts.
-//  - Stay still and it loses interest. Move while it's watching and it charges.
-//  - If the kid freezes during a chase, it stops and stares again, right where it is.
-//  - Catching the kid triggers the jumpscare and a level restart (EscapeGameManager).
-// Crouching and turning off the flashlight make the kid harder to see. Sprinting is loud.
+
 [RequireComponent(typeof(NavMeshAgent))]
 public class MonsterAI : MonoBehaviour
 {
@@ -31,24 +25,16 @@ public class MonsterAI : MonoBehaviour
     [Header("Sight")]
     [SerializeField] private float viewAngle = 120f;
     [SerializeField] private float viewDistance = 12f;
-    [Tooltip("Extra sight distance when the kid's flashlight is on.")]
     [SerializeField] private float flashlightBonus = 7f;
-    [Tooltip("Sight distance is multiplied by this when the kid is crouching.")]
     [SerializeField] private float crouchMultiplier = 0.6f;
-    [Tooltip("Within this distance it notices the kid even from behind.")]
     [SerializeField] private float closeSenseDistance = 2.2f;
-    [Tooltip("The kid counts as moving above this speed (m/s).")]
     [SerializeField] private float moveThreshold = 0.25f;
-    [Tooltip("Seconds after the game starts before it can see anyone.")]
     [SerializeField] private float startDelay = 10f;
 
     [Header("Watching")]
     [SerializeField] private Vector2 watchTime = new Vector2(3f, 5.5f);
-    [Tooltip("Time the kid gets to freeze after its eyes turn red.")]
     [SerializeField] private float reactionTime = 0.5f;
-    [Tooltip("How long the kid must stay still during a chase before it stops to stare.")]
     [SerializeField] private float freezeToStopChase = 1.0f;
-    [Tooltip("After losing interest, it won't stop to stare at a still kid for this long.")]
     [SerializeField] private float ignoreStillAfterWatch = 5f;
 
     [Header("Hearing")]
@@ -67,14 +53,11 @@ public class MonsterAI : MonoBehaviour
     [SerializeField] private AudioClip spottedSting;
     [SerializeField] private AudioClip jumpscareScream;
     [SerializeField] private AudioClip footstep;
-    [Tooltip("Played on every other step while walking: the bad leg dragging.")]
     [SerializeField] private AudioClip dragStep;
     [SerializeField] private AudioClip growl;
-    [Tooltip("Bone cracks when it twitches or snaps its head.")]
     [SerializeField] private AudioClip boneCrack;
 
     [Header("Creepy head")]
-    [Tooltip("The head turns to follow the kid while it watches or chases.")]
     [SerializeField] private float headTrackLimit = 80f;
     [SerializeField] private Vector2 headSnapEvery = new Vector2(0.8f, 2.2f);
 
@@ -117,7 +100,7 @@ public class MonsterAI : MonoBehaviour
 
         if (eyeRenderer != null)
         {
-            eyeMat = eyeRenderer.material; // own copy so only this monster's eyes change
+            eyeMat = eyeRenderer.material;
             eyeMat.EnableKeyword("_EMISSION");
         }
 
@@ -139,7 +122,6 @@ public class MonsterAI : MonoBehaviour
         if (TryPlaceOnNavMesh()) EnterState(State.Roam);
     }
 
-    // Puts the monster on the NavMesh. If the scene has no NavMesh near it, bakes one as a last resort.
     private bool TryPlaceOnNavMesh()
     {
         if (agent.isOnNavMesh) return true;
@@ -204,8 +186,7 @@ public class MonsterAI : MonoBehaviour
             UpdateEyesAndMusic(false);
             return;
         }
-
-        // ---- what the monster knows this frame
+        
         Vector3 pv = playerCC != null ? playerCC.velocity : Vector3.zero;
         pv.y = 0f;
         bool airborne = playerMove != null && !playerMove.IsGroundedStable;
@@ -247,7 +228,6 @@ public class MonsterAI : MonoBehaviour
                 if (lostTime > 1.5f) { EnterState(State.Search); break; }
                 if (stateTimer > watchDuration)
                 {
-                    // the kid stayed still: lose interest and wander off
                     ignoreStillUntil = Time.time + ignoreStillAfterWatch;
                     EnterState(State.Roam);
                 }
@@ -263,7 +243,7 @@ public class MonsterAI : MonoBehaviour
                 }
                 if (sees && stillTime >= freezeToStopChase)
                 {
-                    EnterState(State.Watch); // froze in time: it stops and stares... right there
+                    EnterState(State.Watch);
                     break;
                 }
                 if (!sees && (lostTime > 6f || (!agent.pathPending && agent.remainingDistance < 0.6f)))
@@ -281,7 +261,6 @@ public class MonsterAI : MonoBehaviour
         UpdateCracks();
     }
 
-    // If it's supposed to be walking but hasn't moved for a while, pick somewhere else to go.
     private void UpdateStuck()
     {
         bool shouldMove = !agent.isStopped && (state == State.Roam || state == State.Investigate || state == State.Search || state == State.Chase)
@@ -305,7 +284,6 @@ public class MonsterAI : MonoBehaviour
         steps.PlayOneShot(boneCrack, 0.8f);
     }
 
-    // After the animation: turn the head towards the kid, with sudden unnatural snaps while it stares.
     private void LateUpdate()
     {
         if (headBone == null || player == null) return;
@@ -315,7 +293,6 @@ public class MonsterAI : MonoBehaviour
                            : state == State.Investigate || state == State.Search ? 0.4f : 0f;
         headWeight = Mathf.MoveTowards(headWeight, targetWeight, Time.deltaTime * 3f);
 
-        // snaps: the head jerks sideways, holds, then creeps back
         if (state == State.Watch)
         {
             snapTimer -= Time.deltaTime;
@@ -344,7 +321,6 @@ public class MonsterAI : MonoBehaviour
         headBone.rotation = roll * look * headBone.rotation;
     }
 
-    // ------------------------------------------------------------ states
     private void EnterState(State next)
     {
         state = next;
@@ -406,7 +382,6 @@ public class MonsterAI : MonoBehaviour
             SetAnim("Walk");
             return;
         }
-        // arrived: stand and listen for a moment, then move on
         if (pauseTimer <= 0f) pauseTimer = Random.Range(pauseAtWaypoint.x, pauseAtWaypoint.y);
         SetAnim("Idle");
         pauseTimer -= Time.deltaTime;
@@ -421,7 +396,7 @@ public class MonsterAI : MonoBehaviour
             SetAnim("Walk");
             return;
         }
-        SetAnim("Stare"); // look around where it heard or last saw the kid
+        SetAnim("Stare");
         if (stateTimer > 3.5f) EnterState(State.Roam);
     }
 
@@ -449,7 +424,6 @@ public class MonsterAI : MonoBehaviour
         SetAnim("Walk");
     }
 
-    // ------------------------------------------------------------ senses
     private bool CanSeePlayer()
     {
         if (Time.time - startTime < startDelay) return false;
@@ -468,7 +442,7 @@ public class MonsterAI : MonoBehaviour
         if (dist > closeSenseDistance && Vector3.Angle(transform.forward, flatDir) > viewAngle * 0.5f)
             return false;
 
-        int mask = ~((1 << 2) | (1 << gameObject.layer)); // ignore decoration and other monsters
+        int mask = ~((1 << 2) | (1 << gameObject.layer));
         Vector3 head = player.position + Vector3.up * 0.9f;
         return LineToPlayer(eye, chest, mask) || LineToPlayer(eye, head, mask);
     }
@@ -488,7 +462,6 @@ public class MonsterAI : MonoBehaviour
         return !playerMove.IsCrouching && dist < hearWalkDistance;
     }
 
-    // ------------------------------------------------------------ presentation
     private void FacePlayer()
     {
         Vector3 d = player.position - transform.position;
@@ -529,7 +502,7 @@ public class MonsterAI : MonoBehaviour
         steps.pitch = Random.Range(0.85f, 1.05f);
         stepToggle = !stepToggle;
         if (!running && stepToggle && dragStep != null)
-            steps.PlayOneShot(dragStep, 0.7f);   // the limping leg drags
+            steps.PlayOneShot(dragStep, 0.7f);
         else
             steps.PlayOneShot(footstep, running ? 1f : 0.65f);
     }

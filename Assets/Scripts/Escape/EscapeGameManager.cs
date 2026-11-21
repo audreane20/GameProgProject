@@ -6,16 +6,12 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-// Runs the Hospital Escape level: find the key, unlock the front door, escape.
-// Also sets up the dark mood at runtime: black sky, post-processing, flashlight,
-// footsteps, ambience and random creepy sounds around the player.
+
 public class EscapeGameManager : MonoBehaviour
 {
     public static EscapeGameManager Instance { get; private set; }
-
     [Header("Key")]
     [SerializeField] private KeyPickup key;
-    [Tooltip("The key is moved to one of these at random each time you play.")]
     [SerializeField] private Transform[] keySpawnPoints;
 
     [Header("Ending")]
@@ -29,7 +25,6 @@ public class EscapeGameManager : MonoBehaviour
     [SerializeField] private AudioClip doorLockedSound;
     [SerializeField] private AudioClip doorOpenSound;
     [SerializeField] private AudioClip footstepSound;
-    [Tooltip("Played now and then somewhere near the player, out of sight.")]
     [SerializeField] private AudioClip[] scarySounds;
     [SerializeField] private Vector2 scarySoundInterval = new Vector2(18f, 40f);
 
@@ -85,12 +80,11 @@ public class EscapeGameManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        // Prompts only stay up while something keeps asking for them
         if (promptText != null && promptFrame < Time.frameCount)
             promptText.text = "";
     }
 
-    // ---------- called by KeyPickup / ExitDoor ----------
+
     public void ShowPrompt(string text)
     {
         if (IsOver || promptText == null) return;
@@ -121,7 +115,6 @@ public class EscapeGameManager : MonoBehaviour
         StartCoroutine(EscapeSequence());
     }
 
-    // ---------- setup ----------
     private void SetUpPlayer()
     {
         Camera cam = Player != null ? Player.GetComponentInChildren<Camera>() : Camera.main;
@@ -180,7 +173,6 @@ public class EscapeGameManager : MonoBehaviour
         }
     }
 
-    // ---------- sequences ----------
     private IEnumerator Intro()
     {
         SetFade(1f);
@@ -199,7 +191,6 @@ public class EscapeGameManager : MonoBehaviour
             ShowMessage("Something walks these halls.  If its eyes turn red... don't move.", 5f);
     }
 
-    // ---------- caught by the monster ----------
     public void OnPlayerCaught(MonsterAI monster)
     {
         if (IsOver) return;
@@ -214,7 +205,6 @@ public class EscapeGameManager : MonoBehaviour
         if (messageRoutine != null) StopCoroutine(messageRoutine);
         if (messageText != null) messageText.text = "";
 
-        // freeze the kid
         if (Player != null)
         {
             var move = Player.GetComponent<ChildPlayerController>();
@@ -223,7 +213,6 @@ public class EscapeGameManager : MonoBehaviour
             if (steps != null) steps.enabled = false;
         }
 
-        // snap the camera right into the monster's face
         Camera cam = Player != null ? Player.GetComponentInChildren<Camera>() : Camera.main;
         if (cam != null && monster != null)
         {
@@ -241,7 +230,6 @@ public class EscapeGameManager : MonoBehaviour
                 ct.rotation = Quaternion.LookRotation(face - ct.position);
                 yield return null;
             }
-            // shake and red flashes while it screams
             for (float t = 0f; t < 1.1f; t += Time.deltaTime)
             {
                 ct.position = target + Random.insideUnitSphere * 0.03f;
@@ -253,7 +241,6 @@ public class EscapeGameManager : MonoBehaviour
         }
         else yield return new WaitForSeconds(1.2f);
 
-        // black screen with a quote, then restart the level
         SetFade(1f);
         if (messageText != null && caughtQuotes.Length > 0)
         {
@@ -286,7 +273,6 @@ public class EscapeGameManager : MonoBehaviour
             Debug.LogWarning($"EscapeGameManager: scene '{escapeSceneName}' isn't in the build settings.");
     }
 
-    // ---------- UI ----------
     private void BuildUI()
     {
         var canvasGO = new GameObject("EscapeUI", typeof(Canvas), typeof(CanvasScaler));
@@ -312,7 +298,7 @@ public class EscapeGameManager : MonoBehaviour
         fadeImage = fadeGO.GetComponent<Image>();
         fadeImage.color = Color.black;
         fadeImage.raycastTarget = false;
-        fadeGO.transform.SetAsFirstSibling(); // text stays readable on top of the fade
+        fadeGO.transform.SetAsFirstSibling();
     }
 
     private static TextMeshProUGUI MakeText(Transform parent, string name, Vector2 anchor, Vector2 pos, float size, TextAlignmentOptions align, Vector2 box)

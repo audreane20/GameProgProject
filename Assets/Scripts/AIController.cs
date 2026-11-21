@@ -5,11 +5,10 @@ public class AIController : MonoBehaviour
 {
     public NavMeshAgent Agent { get; private set; }
     public AIAnimationController aiAnimationController { get; private set; }
-    // public Animator Animator { get; private set; } // Not needed since we're not using animations
     public Transform[] Waypoints;
     public Transform Player;
 
-    public float AttackRange = 2f; // New attack range variable
+    public float AttackRange = 2f;
     public LayerMask PlayerLayer;
     public StateType currentState;
     public StateMachine StateMachine { get; private set;}
@@ -21,12 +20,12 @@ public class AIController : MonoBehaviour
     [Header("Vision Settings")]
     public float viewDistance = 10f;
     public float viewAngle = 90f;
-    public float eyeHeight = 1.6f; // where the AI "looks" from
+    public float eyeHeight = 1.6f; 
     public LayerMask obstacleMask;
     public LayerMask playerMask;
 
     [Header("Vision Stability")]
-    public float visionPersistence = 0.5f; // seconds to keep seeing after losing sight
+    public float visionPersistence = 0.5f; 
     private float lastSeenTime = -999f;
 
     [Header("Patrol Settings")]
@@ -37,11 +36,10 @@ public class AIController : MonoBehaviour
     void Start() 
     { 
         //todo
-        if (leftHandTransform == null || rightHandTransform == null)// checks if hands are implemented
+        if (leftHandTransform == null || rightHandTransform == null)
         {
             Debug.LogWarning($"{name}: One or both hand transforms are not assigned.", this);
         }
-        //If player does not exist. look for an object with the player tag. if that object exists, then assign that as the player
         if (Player == null){
             GameObject playerObj = GameObject.FindWithTag("Player");
             if(playerObj != null){
@@ -54,13 +52,12 @@ public class AIController : MonoBehaviour
         
         Agent = GetComponent<NavMeshAgent>(); 
         aiAnimationController = GetComponent<AIAnimationController>(); 
-        // Animator = GetComponent<Animator>(); // Commented out since we're not using animations 
  
         StateMachine = new StateMachine(); 
         StateMachine.AddState(new IdleState(this)); 
         StateMachine.AddState(new PatrolState(this)); 
         StateMachine.AddState(new ChaseState(this)); 
-        StateMachine.AddState(new AttackState(this)); // Add the new AttackState 
+        StateMachine.AddState(new AttackState(this)); 
  
         StateMachine.TransitionToState(StateType.Idle); 
     } 
@@ -72,14 +69,13 @@ public class AIController : MonoBehaviour
     } 
 
     
-    // 
+ 
     public bool CanSeePlayer()
     {
         if (Player == null)
         {
             return false;
         }
-        // If recently seen, still count as visible
         bool recentlySeen = Time.time - lastSeenTime < visionPersistence;
 
         Vector3 eyePosition = transform.position + Vector3.up * eyeHeight;
@@ -88,29 +84,23 @@ public class AIController : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(eyePosition, targetPosition);
         float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
 
-        // Check field of view
         if (angleToPlayer > viewAngle / 2f)
         {
             return recentlySeen;
         }
 
-        // Check distance
         if (distanceToPlayer > viewDistance)
         {
             return recentlySeen;
         }
 
-        // Perform raycast
-        // visionmask: defines what blocks los. in this instance its obstacleMake and Playermask
         int visionMask = obstacleMask | playerMask;
         if (Physics.Raycast(eyePosition, directionToPlayer, out RaycastHit hit, distanceToPlayer, visionMask, QueryTriggerInteraction.Ignore))
         {
-            //checks if what the raycast hit is the player
             bool hitIsPlayer = ((1 << hit.collider.gameObject.layer) & playerMask) != 0 || hit.transform.IsChildOf(Player);
-            // If hit the player
             if (!hitIsPlayer)
             {
-                return recentlySeen; // something is in the way
+                return recentlySeen;
             }
         }
 
@@ -120,18 +110,15 @@ public class AIController : MonoBehaviour
 
     public bool CheckHandsCollision(out GameObject collidedObject, string Tag)
     {
-        // You can define these in AIController (leftHandPoint, rightHandPoint)
         Transform[] handTransforms = { leftHandTransform, rightHandTransform };
 
         foreach (Transform hand in handTransforms)
         {
-            //TODO
-            //skips hand logic if we didn't do it
+
             if(hand == null)
             {
                 continue;
             }
-            // Overlap check — sphere or capsule works well for melee hitboxes
             Collider[] hits = Physics.OverlapSphere(hand.position, 0.5f, PlayerLayer);
 
             foreach (var hit in hits)
@@ -149,10 +136,8 @@ public class AIController : MonoBehaviour
     
 
 
-    // New method to check if the AI is within attack range
     public bool IsPlayerInAttackRange()
     {
-        //Checks if player exists
         if(Player == null)
             return false;
 

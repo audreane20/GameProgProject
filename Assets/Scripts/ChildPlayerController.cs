@@ -6,24 +6,22 @@ using UnityEngine;
 public class ChildPlayerController : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private float walkSpeed = 2.2f;      // a child walks a bit slower than an adult
-    [SerializeField] private float sprintSpeed = 4.0f;    // used only when there is no PlayerStamina
-    [SerializeField] private float acceleration = 12f;    // how quickly we reach full speed
-    [SerializeField] private float jumpHeight = 0.6f;     // metres
+    [SerializeField] private float walkSpeed = 2.2f;
+    [SerializeField] private float sprintSpeed = 4.0f;
+    [SerializeField] private float acceleration = 12f; 
+    [SerializeField] private float jumpHeight = 0.6f;
     [SerializeField] private float gravity = -18f;
-    [SerializeField] private float coyoteTime = 0.1f;     // small grace period to jump after leaving a ledge
+    [SerializeField] private float coyoteTime = 0.1f;  
 
     [Header("Crouch")]
     [SerializeField] private KeyCode crouchKey = KeyCode.C;
     [SerializeField] private KeyCode altCrouchKey = KeyCode.LeftControl;
-    [Tooltip("On: hold the key to stay crouched. Off: press once to crouch, again to stand.")]
     [SerializeField] private bool holdToCrouch = true;
-    [SerializeField] private float crouchHeight = 0.76f;       // matches the kid model's crouch pose
+    [SerializeField] private float crouchHeight = 0.76f;
     [SerializeField] private float crouchSpeed = 1.3f;
     [SerializeField] private float crouchCameraHeight = 0.57f;
-    [SerializeField] private float crouchCameraForward = 0.20f; // head leans forward when crouched
+    [SerializeField] private float crouchCameraForward = 0.20f;
     [SerializeField] private float crouchTransitionSpeed = 8f;
-    [Tooltip("Visual body that shrinks while crouching. Found automatically if it's a child called \"Body\".")]
     [SerializeField] private Transform bodyVisual;
 
     [Header("Mouse Look")]
@@ -34,18 +32,13 @@ public class ChildPlayerController : MonoBehaviour
     [Header("Camera View")]
     [SerializeField] private KeyCode switchViewKey = KeyCode.V;
     [SerializeField] private bool startInThirdPerson = true;
-    [Tooltip("Camera position behind the kid in third person (right, up, back).")]
     [SerializeField] private Vector3 thirdPersonOffset = new Vector3(0.3f, 0.12f, -1.4f);
     [SerializeField] private float cameraCollisionRadius = 0.15f;
 
     [Header("Spawn")]
-    [Tooltip("On start, drop the child onto the surface below it.")]
     [SerializeField] private bool snapToFloorOnStart = true;
-    [Tooltip("If there is nothing below the start point, spawn on an object whose name contains this text.")]
     [SerializeField] private string fallbackFloorName = "Ground";
-    [Tooltip("If the child falls below this height, it is put back at the spawn point.")]
     [SerializeField] private float fallResetHeight = -20f;
-    [Tooltip("Turn off the scene's old Main Camera so the child's camera is used.")]
     [SerializeField] private bool disableOtherMainCameras = true;
 
     private CharacterController controller;
@@ -57,19 +50,17 @@ public class ChildPlayerController : MonoBehaviour
     private Vector3 spawnPoint;
     private float standHeight;
     private float standCameraHeight;
-    private float crouchAmount;      // 0 = standing, 1 = fully crouched
+    private float crouchAmount;
     private bool crouchToggled;
     private float standCameraForward;
-    private Vector3 cameraBase;      // first-person eye position (changes when crouching)
+    private Vector3 cameraBase;      
 
-    // Other scripts (animation, footsteps, AI) can read these.
     public bool IsGrounded => controller != null && controller.isGrounded;
     public bool IsMoving { get; private set; }
     public bool IsSprinting { get; private set; }
     public bool IsCrouching { get; private set; }
     public float CrouchAmount => crouchAmount;
     public bool IsThirdPerson { get; private set; }
-    // Smoothed version of IsGrounded for animations (CharacterController.isGrounded flickers on steps)
     public bool IsGroundedStable => Time.time - lastGroundedTime < 0.15f;
 
     private void Start()
@@ -111,7 +102,6 @@ public class ChildPlayerController : MonoBehaviour
     {
         bool paused = Time.timeScale == 0f;
 
-        // Only look around while the cursor is locked (not while a menu or note is open).
         if (!paused && Cursor.lockState == CursorLockMode.Locked)
             Look();
 
@@ -151,7 +141,7 @@ public class ChildPlayerController : MonoBehaviour
         float speed;
         if (IsCrouching)
         {
-            if (stamina != null) stamina.SetSprinting(false); // stamina recovers while crouching
+            if (stamina != null) stamina.SetSprinting(false);
             speed = crouchSpeed;
             IsSprinting = false;
         }
@@ -173,13 +163,13 @@ public class ChildPlayerController : MonoBehaviour
         {
             lastGroundedTime = Time.time;
             if (verticalVelocity < 0f)
-                verticalVelocity = -2f; // keeps the child pressed onto the floor
+                verticalVelocity = -2f;
         }
 
         bool canJump = Time.time - lastGroundedTime <= coyoteTime;
         if (!paused && canJump && !IsCrouching && Input.GetButtonDown("Jump"))
         {
-            // v = sqrt(h * -2 * g) gives exactly jumpHeight
+           
             verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
             lastGroundedTime = -10f;
         }
@@ -188,7 +178,6 @@ public class ChildPlayerController : MonoBehaviour
 
         CollisionFlags flags = controller.Move((horizontalVelocity + Vector3.up * verticalVelocity) * Time.deltaTime);
 
-        // Stop rising when the head bumps a ceiling
         if ((flags & CollisionFlags.Above) != 0 && verticalVelocity > 0f)
             verticalVelocity = 0f;
     }
@@ -206,7 +195,6 @@ public class ChildPlayerController : MonoBehaviour
             ? !paused && (Input.GetKey(crouchKey) || Input.GetKey(altCrouchKey))
             : crouchToggled;
 
-        // Stay crouched if there's something above (inside a vent, under a bed)
         if (!wantsCrouch && IsCrouching && !HasRoomToStand())
             wantsCrouch = true;
         if (!holdToCrouch && !wantsCrouch)
@@ -217,7 +205,6 @@ public class ChildPlayerController : MonoBehaviour
         float target = IsCrouching ? 1f : 0f;
         crouchAmount = Mathf.MoveTowards(crouchAmount, target, crouchTransitionSpeed * Time.deltaTime);
 
-        // Shrink the collider from the top so the feet stay on the floor
         float height = Mathf.Lerp(standHeight, crouchHeight, crouchAmount);
         controller.height = height;
         controller.center = new Vector3(0f, height / 2f, 0f);
@@ -226,12 +213,10 @@ public class ChildPlayerController : MonoBehaviour
             Mathf.Lerp(standCameraHeight, crouchCameraHeight, crouchAmount),
             Mathf.Lerp(standCameraForward, crouchCameraForward, crouchAmount));
 
-        // Placeholder body squashes down; a rigged model would play a crouch animation instead
         if (bodyVisual != null)
             bodyVisual.localScale = new Vector3(1f, height / standHeight, 1f);
     }
 
-    // Runs after Update so the camera uses this frame's position and look direction.
     private void LateUpdate()
     {
         if (cameraPivot == null)
@@ -243,7 +228,6 @@ public class ChildPlayerController : MonoBehaviour
             return;
         }
 
-        // Orbit behind the kid, pulling in if a wall is in the way
         Vector3 desiredLocal = cameraBase + cameraPivot.localRotation * thirdPersonOffset;
         Vector3 from = transform.TransformPoint(cameraBase);
         Vector3 to = transform.TransformPoint(desiredLocal);
@@ -268,7 +252,7 @@ public class ChildPlayerController : MonoBehaviour
     private void SnapToFloor()
     {
         Physics.SyncTransforms();
-        int mask = ~(1 << gameObject.layer); // ignore the child's own layer
+        int mask = ~(1 << gameObject.layer);
 
         if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out RaycastHit hit, 50f, mask, QueryTriggerInteraction.Ignore))
         {
@@ -279,7 +263,6 @@ public class ChildPlayerController : MonoBehaviour
         if (string.IsNullOrEmpty(fallbackFloorName))
             return;
 
-        // Nothing below us: find the floor tiles by name and stand on the middle one.
         Renderer best = null;
         Vector3 centre = Vector3.zero;
         int count = 0;
@@ -312,7 +295,6 @@ public class ChildPlayerController : MonoBehaviour
         Debug.Log($"{name}: nothing under the start point, spawned on '{best.name}' instead. Move the ChildPlayer in the scene to choose a spawn spot.", this);
     }
 
-    // CharacterController overrides transform.position, so turn it off while moving it.
     private void Teleport(Vector3 position)
     {
         controller.enabled = false;
